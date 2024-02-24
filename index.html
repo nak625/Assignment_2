@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Data Table</title>
+    <style>
+        /* Add CSS styles */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #000;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to retrieve data from API endpoint
+            function fetchData() {
+                $.ajax({
+                    url: 'https://datausa.io/api/data?drilldowns=Nation&measures=Population',
+                    method: 'GET',
+                    success: function(response) {
+                        // Log the response to understand its structure
+                        console.log(response);
+                        
+                        // Check if the response is nested
+                        var data = response.data ? response.data : response;
+
+                        // Sort the data by a specific attribute (e.g., population)
+                        data.sort(function(a, b) {
+                            return a.Year.localeCompare(b.Year);
+                        });
+
+                        // Generate HTML for the table
+                        var tableHtml = '<h2>US Population</h2><table><thead><tr><th>Year</th><th>Population</th></tr></thead><tbody>';
+
+                        // Iterate through the sorted data and populate the table rows
+                        data.forEach(function(item) {
+                            tableHtml += '<tr><td>' + item.Year + '</td><td>' + item.Population + '</td></tr>';
+                        });
+
+                        // Close table tags
+                        tableHtml += '</tbody></table>';
+
+                        // Display the table in the designated HTML element
+                        $('#data-table').html(tableHtml);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors
+                        console.error(error);
+                    }
+                });
+            }
+
+            // Call the fetchData function when the document is ready
+            fetchData();
+        });
+    </script>
+</head>
+<body>
+    <div id="data-table"></div>
+</body>
+</html>
