@@ -3,7 +3,7 @@
 # Python Project Assignment 2: API, JSON, HTML, JavaScript/README
 
 ## Overview
-This Python project consists of an HTML file 'index.html'. This 
+This Python project consists of an HTML file 'index.html'.
 
 ### 1. `index.html`
 - Upon page load, the US Population data is retrieved from an API endpoint. Then the data is parsed, sorted, and properly displayed in a table.
