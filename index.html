@@ -8,7 +8,7 @@
         /* Add CSS styles */
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: auto;
             border: 1px solid #000;
         }
         th, td {
@@ -41,7 +41,7 @@
                         });
 
                         // Generate HTML for the table
-                        var tableHtml = '<h2>US Population</h2><table><thead><tr><th>Year</th><th>Population</th></tr></thead><tbody>';
+                        var tableHtml = '<table><thead><tr><th colspan="2">US Population</th></tr><tr><th>Year</th><th>Population</th></tr></thead><tbody>';
 
                         // Iterate through the sorted data and populate the table rows
                         data.forEach(function(item) {
